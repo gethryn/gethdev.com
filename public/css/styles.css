@@ -2,3 +2,8 @@ body {
 	padding-top: 60px;
 	padding-bottom: 40px;
 }
+
+span.geth_code {
+	font-family: Menlo, Monaco, "Courier New", monospace;
+	font-size: 8px;
+}
