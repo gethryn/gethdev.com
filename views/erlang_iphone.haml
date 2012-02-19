@@ -1,0 +1,53 @@
+.container
+	%header{:class => "jumbotron subhead", :id =>"overview"}
+		%h1 ErlangC v1.1 for iPhone
+		%p Perform basic interval staffing calculations using ErlangC on your iPhone
+
+	.row
+		.span12
+			%h2
+				Features
+			%p
+				The ErlangC application allows you to quickly calculate the call centre staffing requirements for a given interval.  It is intended as a
+				%em back of the napkin
+				calculator that is portable, and can be used in meetings for quick
+				%em what-if
+				calculations.
+			%p
+				Start with your average calls per interval, your average handle time, service level and occupancy goal, and let ErlangC calculate the number of staff required. Email a CSV file, text report or simple summary direct from within the application. Copy output to clipboard to easily paste in any other application on your iPhone.
+			%p
+				Simply enter the average calls offered per interval, the length of those calls (handle time), and your service level objectives. Press Run! to instantly see the number of staff you require.
+			%p
+				%a{:href => "http://itunes.apple.com/app/erlangc/id436087475?mt=8", :target => "_blank"} See the ErlangC v1.1 App on The App Store.
+			%h2
+				Screenshots
+			%ul.thumbnails
+				%li.span3
+					.thumbnail
+						%img.screenshot{:src => "/images/iphone/EntryScreen.png"}
+						%br/
+						%h5 Enter Your Data
+						%p Enter calls offered, handle time, service level goal in % and seconds and maximum occupancy on this screen, and press RUN.
+				%li.span3
+					.thumbnail
+						%img.screenshot{:src => "/images/iphone/ResultsScreen.png"}
+						%br/
+						%h5 Get the Results
+						%p The optimum number of agents required (+0) is shown in a range from 4 below to 4 above optimum so you can fine tune.
+				%li.span3
+					.thumbnail
+						%img.screenshot{:src => "/images/iphone/EmailResults.png"}
+						%br/
+						%h5 Now Email Your Results
+						%p Pick from a variety of formats in which to email your results.  You can also copy/paste results to another app on your phone.
+			%p
+				If you’ve got a suggestion, 
+				%a{:href => "mailto:info@gethdev.com"} we’d love to hear it!
+	.navbar.navbar-fixed-bottom
+		%ul.breadcrumb
+			%li
+				%a{:href =>"/"} Home
+				%span.divider
+			%li.active
+				%a{:href =>"/iphone/erlang"} ErlangC for iPhone
+	%div= haml :footer

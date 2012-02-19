@@ -2,8 +2,63 @@ body {
 	padding-top: 60px;
 	padding-bottom: 40px;
 }
+/* Body and structure
+-------------------------------------------------- */
+body {
+  position: relative;
+  padding-top: 90px;
+  background-color: #fff;
+  background-image: url(../images/grid-18px-masked.png);
+  background-repeat: repeat-x;
+  background-position: 0 40px;
+}
 
-span.geth_code {
+.geth_code td {
 	font-family: Menlo, Monaco, "Courier New", monospace;
-	font-size: 8px;
+	font-size: 12px;
+}
+
+.geth_code th {
+	font-family: Menlo, Monaco, "Courier New", monospace;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #f5f5ff;
+}
+
+.center {
+	text-align: center;
+}
+
+.excelformula {
+	background-color: #f5f5ff;
+}
+
+.screenshot {
+	height: 320px;
+	width: 200px;
+}
+
+/* Jumbotrons
+-------------------------------------------------- */
+.jumbotron {
+  position: relative;
+}
+.jumbotron h1 {
+  margin-bottom: 9px;
+  font-size: 81px;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.jumbotron p {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+.jumbotron .btn-large {
+  font-size: 20px;
+  font-weight: normal;
+  padding: 14px 24px;
+  margin-right: 10px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
 }

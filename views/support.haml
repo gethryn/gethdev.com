@@ -1,0 +1,34 @@
+.container
+	%header{:class => "jumbotron subhead", :id =>"overview"}
+		%h1 Support Information
+		%p Details to reach our development team to submit your support requests and suggestions.
+
+	.row
+		.span12
+			%form.form-horizontal{:method => "post", :action => "/support"}
+				%fieldset
+					%legend Submit a Support Request
+					.control-group
+						%label.control-label{:for => "name"} Name
+						.controls
+							%input.input-xlarge{:type => "text", :id => "name", :name => "post[name]"}
+					.control-group
+						%label.control-label{:for => "email"} Email
+						.controls
+							%input.input-xlarge{:type => "text", :id => "email", :name => "post[email]"}
+					.control-group
+						%label.control-label{:for => "issue"} Support Required
+						.controls
+							%textarea.input-xlarge{:type => "textarea", :id => "issue", :rows => 10, :name => "post[issue]"}
+							%p.help-block 
+								Please provide as much detail as possible. 
+								%br/
+								Feel free to paste in your results from the application.
+					.form-actions
+						%button{:type =>"submit", :class=>"btn btn-primary"} Save Changes
+						%button.btn Cancel
+	.row
+		.span12
+			%p 
+				Don't forget, you can also reach the development team by email at
+				%a{:href => "mailto:info@gethdev.com"} info@gethdev.com

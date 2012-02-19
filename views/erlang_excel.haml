@@ -1,7 +1,7 @@
 .container
-	.hero-unit
-		%h1
-			Using ErlangC in Excel
+	%header{:class => "jumbotron subhead", :id =>"overview"}
+		%h1 Using ErlangC in Excel
+		%p How to perform basic interval staffing calculations using ErlangC in Excel
 
 	.row
 		.span12
@@ -11,7 +11,9 @@
 				For even the most capable users of Excel, trying to implement worksheets using ErlangC to develop staffing models remains beyond their reach.  This brief tutorial explains how ErlangC works and how to translate it into Excel.
 			%p
 				The basis of ErlangC is a statistical distribution, known as the 
-				%a{:href => 'http://en.wikipedia.org/wiki/Poisson_distribution'} Poisson Distribution
+				%a{:href => 'http://en.wikipedia.org/wiki/Poisson_distribution'}
+					Poisson Distribution
+					%i.icon-share
 				, which expresses the probability of a given number of events (e.g. calls) occurring in a fixed interval (e.g. 30 mins) if these events are unrelated to each other (each call is different) and we know the average rate at which these events occur (e.g., 20 calls lasting 3 mins each tend to arrive in a 30 min interval).
 			%p
 				There are two calculations for computing Poisson values, which I will show below 
@@ -24,10 +26,10 @@
 			%h3
 				Poisson Probability Density Function
 			%p
-				i.e. The likelihood of 
+				e.g. The likelihood of 
 				%strong exactly 
 				15 agents' worth of calls coming in during an interval, when there is usually only enough calls for 10 agents. 
-			%p
+			%pre.center
 				%img{:src => '/images/poisson_pdf.png'}
 			%p
 				%strong lambda 
@@ -40,21 +42,22 @@
 				is the base of the natural logarithm (&approx; 2.71828)
 			%p
 				So for a normal rate of 10, getting exactly 15 agents' worth of calls in that interval can be calculated as:
-			%img{:src => '/images/poisson_pdf_result.png'}
+			%pre.center
+				%img{:src => '/images/poisson_pdf_result.png'}
 			%p
 				or only about a 3% chance that 15 agents' worth of calls will arrive in an interval where we normally get around 10 agents' worth.
 			%h4
 				The EXCEL formula for Poisson Probability Density Function:
-			%pre
+			%pre.excelformula
 				&= "=POISSON(15,10,0)"
 		.span6
 			%h3
 				Poisson Cumulative Distribution Function
 			%p
-				i.e. The likelihood of 
+				e.g. The likelihood of 
 				%strong up to
 				15 agents' worth of calls coming in during an interval, when there is usually only enough calls for 10 agents. 
-			%p
+			%pre.center
 				%img{:src => '/images/poisson_cdf.png'}
 			%p
 			%p
@@ -68,12 +71,13 @@
 				is the base of the natural logarithm (&approx; 2.71828)
 			%p
 				So for a normal rate of 10, getting &lt;=15 agents' worth of calls in that interval can be calculated as:
-			%img{:src => '/images/poisson_cdf_result.png'}
+			%pre.center
+				%img{:src => '/images/poisson_cdf_result.png'}
 			%p
 				or about a 95% chance that less than 15 agents' worth of calls will arrive in an interval where we normally get around 10 agents' worth.
 			%h4
 				The EXCEL formula for Poisson Cumulative Distribution Function:
-			%pre
+			%pre.excelformula
 				&= "=POISSON(15,10,1)"
 	.row
 		.span12
@@ -81,26 +85,28 @@
 				The ErlangC Formula
 			%p
 				Why on earth have we spent all this time on the Poisson Distribution?  Because it forms the basis for how to calculate ErlangC.  Observe the ErlangC formula which I have written in a slightly expanded state to illustrate this point.  Do you notice there are similarities to the formulas shown above?
-			%p
+			%pre.center
 				%img{:src => '/images/erlang_expanded.png'}
 			%p
 				The numerator of the Erlang C formula is just a Poisson Probability Density Function, as is the left hand side of the denominator.  The right hand side of the denominator is a Poisson Cumulative Distribution Function.  
-			%p
+			%pre.center
 				%img{:src => '/images/erlang_expanded_excel.png'}
 			%p
 				This is great news, as we can now represent this monster formula very simply in Excel.  The remainder of our task is performing fairly simple calculations in excel to determine the values of k, lambda. The letter rho (like an italic p) is simply shorthand for 
 				%strong lambda / k.
+				It is analogous to
+				%em occupancy.
 			%h4
 				The EXCEL formula for ErlangC:
-			%pre
+			%pre.excelformula
 				&= "=POISSON(k,lambda,0)/(POISSON(k,lambda,0)+(1-rho)*POISSON(k-1,lambda,1))"
 			%p
 				"Great," you say, merrily plugging in our example numbers into the formula:
-			%pre
+			%pre.excelformula
 				&= "=POISSON(15,10,0)/(POISSON(15,10,0)+(1-(10/15))*POISSON(15-1,10,1))"
 			%p
 				only to get the result
-			%pre
+			%pre.excelformula
 				0.102042367
 			%p
 				%strong Now what?! 
@@ -115,7 +121,7 @@
 		.span12
 			%p
 				We first enter the inputs.  All durations should be in seconds.
-			%span{:class => 'geth_code'}
+			.geth_code
 				%table{:class => 'table table-bordered', :cols => '6'}
 					%tr
 						%th #
@@ -126,11 +132,16 @@
 						%th F
 					%tr
 						%th 1
-						%th NCO
-						%th Interval Length
-						%th Call Length
-						%th Number of Agents (k)
-						%th Target ASA
+						%td 
+							%strong NCO
+						%td
+							%strong Interval Length
+						%td 
+							%strong Call Length
+						%td 
+							%strong Number of Agents (k)
+						%td 
+							%strong Target ASA
 					%tr
 						%th 2
 						%td 250
@@ -170,9 +181,12 @@
 						%th I
 					%tr
 						%th 1
-						%th Traffic Intensity (lambda)
-						%th Occupancy (rho)
-						%th ErlangC
+						%td 
+							%strong Traffic Intensity (lambda)
+						%td 
+							%strong Occupancy (rho)
+						%td 
+							%strong ErlangC
 					%tr
 						%th 2
 						%td =(B2/C2)*D2
@@ -202,28 +216,38 @@
 						%th K
 						%th L
 						%th M
+						%th N
 					%tr
 						%th 1
-						%th % Immediate Answer
-						%th % Service Level Achieved
-						%th ASA Acheived
+						%td 
+							%strong % Immediate Answer
+						%td 
+							%strong % Service Level Achieved
+						%td
+							%strong ASA Acheived
+						%td
+							%strong Discard Row?
 					%tr
 						%th 2
 						%td =1-I2
 						%td =1+I2*EXP(-(E2-G2)*F2/D2)
 						%td =I2*D2/(E2*(1-H2))
+						%td =IF(AND(E2&gt;G2,L2&lt;0.99),0,1)
 					%tr
 						%th 3
 						%td =1-I3
 						%td =1+I3*EXP(-(E3-G3)*F3/D3)
 						%td =I3*D3/(E3*(1-H3))
+						%td =IF(AND(E3&gt;G3,L3&lt;0.99),0,1)
 					%tr
 						%th 4
 						%td =1-I4
 						%td =1+I4*EXP(-(E4-G4)*F4/D4)
 						%td =I4*D4/(E4*(1-H4))
+						%td =IF(AND(E4&gt;G4,L4&lt;0.99),0,1)
 					%tr
 						%th ...
+						%td ...
 						%td ...
 						%td ...
 						%td ...
@@ -239,7 +263,9 @@
 				%li
 					Excel has limitations on the size of these calculations.  In older versions, you may be limited to about 238 agents.  Also note that Excel has replaced the POISSON formula with a POISSON.DIST formula in later versions.  Both work in exactly the same way, so you may use whichever you wish.
 			%p
-				With the appropriate rows discarded, you can now assess those rows that are within useful limits.  To select the ideal number of agents, you need to compare the service level achieved and ASA achieved against your goals for the call centre.  For example, if your service level was to answer 80% of calls in 20 secs, you should select a number of agents from a row where the Service Level Achieved is &gt;=80% and where ASA Achieved is also &lt;= 20 secs, expressed as 80/20.
+				The formulas in Column N will help you to easily identify which rows to discard.  The formula returns 1 if the row should be discarded, and 0 if it should be included in your results.
+			%p
+				With the appropriate rows discarded, you can now assess those rows that are within useful limits.  To select the ideal number of agents, you need to compare the service level achieved and ASA achieved against your goals for the call centre.  For example, if your service level was to answer 80% of calls in 20 secs, expressed as 80/20, you should select a number of agents from a row where the Service Level Achieved is &gt;=80% and where ASA Achieved is also &lt;= 20 secs.
 			%p
 				Using the inputs shown in this example, we would see that with 250 calls lasting 240 secs each in a 30 min (1800 sec) interval, I would need 39 agents to achieve a service level of 80% answered in 20 seconds (80/20)
 			%h2
@@ -249,3 +275,11 @@
 			%p
 				%a{:href => 'mailto:geth@gethdev.com'} Email me
 				if you'd like to know more about these add ins.  We hope to have them available for download shortly.
+	.navbar.navbar-fixed-bottom
+		%ul.breadcrumb
+			%li
+				%a{:href =>"/"} Home
+				%span.divider
+			%li.active
+				%a{:href =>"/excel/erlang"} ErlangC for Excel
+	%div= haml :footer

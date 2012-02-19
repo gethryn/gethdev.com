@@ -14,22 +14,26 @@
 			%p
 				I've often had requests from people for formulas they can use in MS Excel for generating staffing models using ErlangC methods.  Some of the basic information you need to do this is available freely here. 
 			%p
-				%a.btn{:href => '/excel/erlang'} View Details
+				%a.btn{:class => "btn-info", :href => '/excel/erlang'} View Details
 		.span4
 			%h2
-				Forecasting Methods
+				Forecasting in Excel
 			%p
 				We are developing MS Excel worksheets and tutorials for long and short term forecasting calculations.
 			%p
-				%a.btn{:href => '/excel/forecast'} View Details
+				%a.btn{:class => "btn-info disabled", :href => '/'} View Details (Coming Soon)
 		.span4
 			%h2
-				Shrinkage Calculator
+				Shrinkage in Excel
 			%p
 				Analyse your off-phone activities to determine how productive your call centre workforce is.  Take a look at our Excel Shrinkage Calculators (coming soon).
 			%p
-				%a.btn{:href => '/excel/shrinkage'} View Details
+				%a.btn{:class => "btn-info disabled", :href => '/'} View Details (Coming Soon)
 
 	%hr
-
+	.navbar.navbar-fixed-bottom
+		%ul.breadcrumb
+			%li.active
+				%a{:href =>"/"} Home
+				%span.divider
 	%div= haml :footer
