@@ -1,6 +1,7 @@
 
 require 'sinatra'
 require 'haml'
+require 'pony'
 
 # set UTF-8 for outgoing
 before do
@@ -28,8 +29,11 @@ get '/support' do
 end
 
 post '/support' do
-    @name = "#{params[:post][:name]}"
-    @email = "#{params[:post][:email]}"
+    @name = "#{params[:post][:name]}" || 'Not Provided'
+    @email = "#{params[:post][:email]}" || 'not@provided.com'
     @issue = "#{params[:post][:issue]}"
+    Pony.mail :to => "support@gethdev.com", :from => @email, :subject => "Support Request from #{@name}",
+              :cc => @email, :body => @issue unless @issue.is_empty?
+    @notice = "Thank you #{@name}, your support request was sent to support@gethdev.com, and CC'd to you at #{@email}"
     haml :support
 end
