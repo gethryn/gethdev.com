@@ -29,11 +29,11 @@ get '/support' do
 end
 
 post '/support' do
-    @name = "#{params[:post][:name]}" || 'Not Provided'
-    @email = "#{params[:post][:email]}" || 'not@provided.com'
-    @issue = "#{params[:post][:issue]}"
+    @name = "#{params[:post][:name]}" || 'Name Not Provided'
+    @email = "#{params[:post][:email]}" || 'info@gethdev.com'
+    @issue = "#{params[:post][:issue]}" || 'None'
     Pony.mail :to => "support@gethdev.com", :from => @email, :subject => "Support Request from #{@name}",
-              :cc => @email, :body => @issue unless @issue.is_empty?
+              :cc => @email, :body => @issue
     @notice = "Thank you #{@name}, your support request was sent to support@gethdev.com, and CC'd to you at #{@email}"
     haml :support
 end
